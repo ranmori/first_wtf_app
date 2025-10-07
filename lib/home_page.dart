@@ -17,6 +17,23 @@ class HomePage extends StatelessWidget {
         ],
         leading: Icon(Icons.menu),
       ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: TextField(
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                hintText: "Search hospital or address",
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(8)
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
