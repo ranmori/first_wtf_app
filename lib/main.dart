@@ -1,3 +1,4 @@
+import 'package:first_wtf_app/bottom_navigation.dart';
 import 'package:first_wtf_app/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage()
+      home: BottomNavigation()
     );
   }
 }
