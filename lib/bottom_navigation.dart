@@ -12,19 +12,17 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int indexToBeShown = 0;
-
   var pages = [HomePage(), ContactPage(), ProfilePage()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[indexToBeShown],
-
+      body: pages[indexToBeShown],//IndexedStack is an alternative
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: indexToBeShown,
-        onTap: (value) {
+        onTap: (newIndex) {
           setState(() {
-            indexToBeShown = value;
+            indexToBeShown = newIndex;
           });
         },
         items: [
