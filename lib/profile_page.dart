@@ -5,6 +5,25 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("profile page"),);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Profile"),
+        centerTitle: true,
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
+      ),
+      body: ListView(
+        children: [
+          Container(
+            decoration: BoxDecoration(shape: BoxShape.circle),
+            clipBehavior: Clip.hardEdge,
+            child: Image.asset(
+              "assets/profile_pics.jpg",
+              width: 100,
+              height: 100,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
