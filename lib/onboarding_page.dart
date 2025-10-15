@@ -1,4 +1,6 @@
+import 'package:first_wtf_app/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -9,6 +11,22 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingPageState extends State<OnboardingPage> {
   int activeIndex = 0;
+  int count = 3;
+
+  List<OnboardingItem> items = [
+    OnboardingItem(
+      title: "Welcome to MediCall",
+      subtitle:
+          "We help you make ambulance requests for emergency and other purposes",
+      asset: "assets/onboardingscr.png",
+    ),
+    OnboardingItem(
+      title: "Get emergency medical help fast ",
+      subtitle:
+          "wherever you are. Need urgent help? We’ll connect you to the nearest available ambulance.",
+      asset: "assets/onboardingscr.png",
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +37,18 @@ class _OnboardingPageState extends State<OnboardingPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 16,
         children: [
-          CustomIndicator(
-            indicatorCount: 3, 
-            activeIndex: activeIndex,
-          ),
-          Image.asset("assets/onboardingscr.png", width: 300, height: 300),
+          CustomIndicator(indicatorCount: count, activeIndex: activeIndex),
+          Image.asset("", width: 300, height: 300),
           Text(
-            "Welcome to MediCall",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+            "",
+            style: GoogleFonts.aDLaMDisplay(
+              fontWeight: FontWeight.w600,
+              fontSize: 32,
+            ),
           ),
           Text(
-            "We help you make ambulance requests for emergency and other purposes",
-            style: TextStyle(fontSize: 16),
+            "",
+            style: GoogleFonts.k2d(fontSize: 16),
             textAlign: TextAlign.center,
           ),
         ],
@@ -52,9 +70,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  activeIndex = activeIndex + 1;
-                });
+                if (activeIndex < count - 1) {
+                  setState(() {
+                    activeIndex = activeIndex + 1;
+                  });
+                } else {
+                  Navigator.of(context).pushReplacementNamed("/home");
+                }
               },
               child: Text("Next"),
             ),
@@ -93,4 +115,16 @@ class CustomIndicator extends StatelessWidget {
       ),
     );
   }
+}
+
+class OnboardingItem {
+  String title;
+  String subtitle;
+  String asset;
+
+  OnboardingItem({
+    required this.title,
+    required this.subtitle,
+    required this.asset,
+  });
 }
