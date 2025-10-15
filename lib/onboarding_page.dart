@@ -51,6 +51,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               fontWeight: FontWeight.w600,
               fontSize: 32,
             ),
+            textAlign: TextAlign.center
           ),
           Text(
             onboardingItemToShow.subtitle,
