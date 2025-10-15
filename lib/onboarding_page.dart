@@ -1,4 +1,4 @@
-import 'package:first_wtf_app/profile_page.dart';
+import 'package:first_wtf_app/custom_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,7 +11,6 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingPageState extends State<OnboardingPage> {
   int activeIndex = 0;
-  int count = 3;
 
   List<OnboardingItem> items = [
     OnboardingItem(
@@ -26,28 +25,35 @@ class _OnboardingPageState extends State<OnboardingPage> {
           "wherever you are. Need urgent help? We’ll connect you to the nearest available ambulance.",
       asset: "assets/onboardingscr.png",
     ),
+    OnboardingItem(
+      title: "Meet world class respondents",
+      subtitle:
+          "wherever you are. Need urgent help? We’ll connect you to world class respondents",
+      asset: "assets/onboardingscr.png",
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    print(activeIndex);
+    var onboardingItemToShow = items[activeIndex];
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 16,
         children: [
-          CustomIndicator(indicatorCount: count, activeIndex: activeIndex),
-          Image.asset("", width: 300, height: 300),
+          CustomIndicator(indicatorCount: items.length, activeIndex: activeIndex),
+          Image.asset(onboardingItemToShow.asset, width: 300, height: 300),
           Text(
-            "",
+            onboardingItemToShow.title,
             style: GoogleFonts.aDLaMDisplay(
               fontWeight: FontWeight.w600,
               fontSize: 32,
             ),
           ),
           Text(
-            "",
+            onboardingItemToShow.subtitle,
             style: GoogleFonts.k2d(fontSize: 16),
             textAlign: TextAlign.center,
           ),
@@ -70,7 +76,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ),
             ElevatedButton(
               onPressed: () {
-                if (activeIndex < count - 1) {
+                if (activeIndex < items.length - 1) {
                   setState(() {
                     activeIndex = activeIndex + 1;
                   });
@@ -81,36 +87,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
               child: Text("Next"),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class CustomIndicator extends StatelessWidget {
-  const CustomIndicator({
-    super.key,
-    required this.indicatorCount,
-    required this.activeIndex,
-  });
-
-  final int indicatorCount;
-  final int activeIndex;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      spacing: 2,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(
-        indicatorCount,
-        (index) => Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: activeIndex == index ? Colors.blue : Colors.blue.shade200,
-          ),
-          height: 10,
-          width: 10,
         ),
       ),
     );
