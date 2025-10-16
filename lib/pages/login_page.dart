@@ -48,8 +48,35 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 16),
             ElevatedButton(
-              onPressed: (){},
+              style: ElevatedButton.styleFrom(
+                fixedSize: Size(400, 55), //width, height
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () {},
               child: Text("Login"),
+            ),
+            SizedBox(height: 24),
+            Row(
+              spacing: 8,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(child: Divider()), 
+                Text("Sign up with"), 
+                Expanded(child: Divider()),
+              ],
+            ),
+            Text("Icons here"),
+            SizedBox(height: 36,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Don't have an account? "),
+                GestureDetector(child: Text("Sign up", style: TextStyle(color: Colors.blue),))
+              ],
             )
           ],
         ),
