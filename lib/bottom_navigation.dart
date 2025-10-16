@@ -1,6 +1,6 @@
-import 'package:first_wtf_app/contact_page.dart';
-import 'package:first_wtf_app/home_page.dart';
-import 'package:first_wtf_app/profile_page.dart';
+import 'package:first_wtf_app/pages/contact_page.dart';
+import 'package:first_wtf_app/pages/home_page.dart';
+import 'package:first_wtf_app/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigation extends StatefulWidget {

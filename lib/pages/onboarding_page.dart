@@ -1,4 +1,4 @@
-import 'package:first_wtf_app/custom_indicator.dart';
+import 'package:first_wtf_app/widgets/custom_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -82,7 +82,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     activeIndex = activeIndex + 1;
                   });
                 } else {
-                  Navigator.of(context).pushReplacementNamed("/home");
+                  Navigator.of(context).pushReplacementNamed("/login");
                 }
               },
               child: Text("Next"),

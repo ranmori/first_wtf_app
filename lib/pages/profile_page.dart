@@ -1,4 +1,4 @@
-import 'package:first_wtf_app/notifications_page.dart';
+import 'package:first_wtf_app/pages/notifications_page.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
