@@ -1,5 +1,7 @@
+import 'package:first_wtf_app/widgets/custom_button.dart';
 import 'package:first_wtf_app/widgets/custom_textfield.dart';
 import 'package:first_wtf_app/widgets/password_textfield.dart';
+import 'package:first_wtf_app/widgets/social_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,9 +23,9 @@ class _SignupPageState extends State<SignupPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: 16,
           children: [
-            SizedBox(height: 100,),
+            SizedBox(height: 100),
             Text(
-              "Welcome Back",
+              "Get Started",
               textAlign: TextAlign.center,
               style: GoogleFonts.play(
                 fontSize: 24,
@@ -32,14 +34,34 @@ class _SignupPageState extends State<SignupPage> {
               ),
             ),
             Text(
-              "Been a while",
+              "Create an account to continue",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16),
             ),
-            CustomTextField(label: "Username",),
-            CustomTextField(label: "Email",),
+            CustomTextField(label: "Username"),
+            CustomTextField(label: "Email"),
             PasswordTextfield(),
             PasswordTextfield(),
+            CustomButton(
+              text: 'Sign up',
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed("/home");
+              },
+            ),
+            SocialSignIn(),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Already have an account? "),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushReplacementNamed("/login");
+                  },
+                  child: Text("Login", style: TextStyle(color: Colors.blue)),
+                ),
+              ],
+            ),
           ],
         ),
       ),

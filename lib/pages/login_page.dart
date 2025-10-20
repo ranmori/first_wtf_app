@@ -1,5 +1,7 @@
+import 'package:first_wtf_app/widgets/custom_button.dart';
 import 'package:first_wtf_app/widgets/custom_textfield.dart';
 import 'package:first_wtf_app/widgets/password_textfield.dart';
+import 'package:first_wtf_app/widgets/social_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -30,57 +32,33 @@ class LoginPage extends StatelessWidget {
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 32),
-            CustomTextField(
-              label: "Email",
-            ),
+            CustomTextField(label: "Email"),
             SizedBox(height: 16),
             PasswordTextfield(),
             SizedBox(height: 16),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                fixedSize: Size(400, 55), //width, height
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-              ),
-              onPressed: () {},
-              child: Text("Login"),
+            CustomButton(
+              text: "Login",
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed("/home");
+              },
             ),
             SizedBox(height: 24),
-            Row(
-              spacing: 8,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(child: Divider()), 
-                Text("Sign up with"), 
-                Expanded(child: Divider()),
-              ],
-            ),
-            SizedBox(height: 12,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 8,
-              children: [
-                InkWell(onTap: (){},child: Image.asset("assets/google.png",width: 50, height: 50,)),
-                InkWell(onTap: (){},child: Image.asset("assets/fb.png",width: 50, height: 50,)),
-                InkWell(onTap: (){},child: Image.asset("assets/x.png",width: 50, height: 50,)),
-              ],
-            ),
-            SizedBox(height: 36,),
+
+            SocialSignIn(),
+
+            SizedBox(height: 36),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Don't have an account? "),
                 GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).pushNamed("/signup");
+                  onTap: () {
+                    Navigator.of(context).pushReplacementNamed("/signup");
                   },
-                  child: Text("Sign up", style: TextStyle(color: Colors.blue),)
-                )
+                  child: Text("Sign up", style: TextStyle(color: Colors.blue)),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),
