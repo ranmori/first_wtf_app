@@ -87,6 +87,12 @@ class _LoginPageState extends State<LoginPage> {
                 Navigator.of(context).pushReplacementNamed("/home");
               },
             ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed("/forgot");
+              },
+              child: Text("Forgot Password?"),
+            ),
             SizedBox(height: 24),
 
             SocialSignIn(),
