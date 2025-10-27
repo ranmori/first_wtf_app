@@ -1,3 +1,4 @@
+import 'package:first_wtf_app/model/onboarding_item.dart';
 import 'package:first_wtf_app/widgets/custom_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -92,16 +93,4 @@ class _OnboardingPageState extends State<OnboardingPage> {
       ),
     );
   }
-}
-
-class OnboardingItem {
-  String title;
-  String subtitle;
-  String asset;
-
-  OnboardingItem({
-    required this.title,
-    required this.subtitle,
-    required this.asset,
-  });
 }

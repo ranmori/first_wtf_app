@@ -56,6 +56,7 @@ class _LoginPageState extends State<LoginPage> {
             CustomButton(
               text: "Login",
               onPressed: () {
+                
                 // check email
                 // if it is not valid return and show message
                 // check password
@@ -73,13 +74,6 @@ class _LoginPageState extends State<LoginPage> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("Not a valid passord Try again")),
                   );
-
-                  // showDialog(context: context, builder: (context){
-                  //   return AlertDialog(
-                  //     content: Text("Not a valid passord Try again"),
-                  //     actions: [],
-                  //   );
-                  // });
 
                   return;
                 }
