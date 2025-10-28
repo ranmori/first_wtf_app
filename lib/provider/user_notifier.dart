@@ -5,14 +5,20 @@ import 'package:flutter/material.dart';
 class UserNotifier extends ChangeNotifier{
   UserDetail? loggedInUser;
 
-
-  void login(String email, String password) async{
+  void login(BuildContext context, String email, String password) async{
+    print("Got in to log in function");
+    // You can do more like validate if it is a valid
+    //
+    //
     Future.delayed(Duration(seconds: 2));
 
-    loggedInUser = USER_DETAILS[0];
+    for(var userDetail in USER_DETAILS){
+      if(userDetail.email == email){
+        loggedInUser = userDetail;
+        Navigator.of(context).pushReplacementNamed("/home");
+      }
+    }
 
     notifyListeners();
   }
-
-  
 }

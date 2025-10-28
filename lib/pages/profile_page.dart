@@ -1,5 +1,8 @@
+import 'package:first_wtf_app/model/user_detail.dart';
 import 'package:first_wtf_app/pages/notifications_page.dart';
+import 'package:first_wtf_app/provider/user_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -37,7 +40,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 borderRadius: BorderRadius.circular(8)
               )
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, "/login");
+            },
             icon: Icon(Icons.logout),
             label: Text("Logout"),
           ),
@@ -109,14 +114,18 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _buildDetails() {
+    UserDetail? user = Provider.of<UserNotifier>(context).loggedInUser;
+
+    if(user == null) return Text("User Details not set");
+
     return Column(
       children: [
         Text(
-          "Hannah Micheal",
+          user.name,
           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
         ),
         Text(
-          "hannahmail@gnail.com",
+          user.email,
           style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
         ),
       ],

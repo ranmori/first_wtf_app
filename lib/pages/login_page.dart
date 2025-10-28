@@ -1,9 +1,11 @@
+import 'package:first_wtf_app/provider/user_notifier.dart';
 import 'package:first_wtf_app/widgets/custom_button.dart';
 import 'package:first_wtf_app/widgets/custom_textfield.dart';
 import 'package:first_wtf_app/widgets/password_textfield.dart';
 import 'package:first_wtf_app/widgets/social_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -24,6 +26,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    var userNotifier = Provider.of<UserNotifier>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
@@ -56,29 +60,14 @@ class _LoginPageState extends State<LoginPage> {
             CustomButton(
               text: "Login",
               onPressed: () {
+                // calling the login method in our notifier class
+                //
+                userNotifier.login(
+                  context, 
+                  emailController.text, 
+                  passwordController.text
+                );
                 
-                // check email
-                // if it is not valid return and show message
-                // check password
-                // if it is not valid return and show message
-                // else take user to the next page
-                if (emailController.text != "anto@gmail.com") {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Not a valid email. Try again")),
-                  );
-
-                  return;
-                }
-
-                if (passwordController.text != "23456") {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Not a valid passord Try again")),
-                  );
-
-                  return;
-                }
-
-                Navigator.of(context).pushReplacementNamed("/home");
               },
             ),
             TextButton(
