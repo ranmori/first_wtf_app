@@ -13,9 +13,11 @@ class UserNotifier extends ChangeNotifier{
     Future.delayed(Duration(seconds: 2));
 
     for(var userDetail in USER_DETAILS){
-      if(userDetail.email == email){
+      if(userDetail.email == email && userDetail.password == password){
         loggedInUser = userDetail;
         Navigator.of(context).pushReplacementNamed("/home");
+      }else{
+        // notfy user using
       }
     }
 
