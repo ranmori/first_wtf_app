@@ -1,4 +1,5 @@
 import 'package:first_wtf_app/widgets/contact_item.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -84,11 +85,19 @@ class _HomePageState extends State<HomePage> {
   Widget _buildMapView() {
     return ListView(
       children: [
-        Image.asset(
-          "assets/map.png",
-          width: MediaQuery.sizeOf(context).width * 0.8,
-          height: MediaQuery.sizeOf(context).height * 1,
-          fit: BoxFit.cover,
+        SizedBox(
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).height * 0.7,
+          child: GoogleMap(
+            // onMapCreated: _onMapCreated,
+            initialCameraPosition: const CameraPosition(
+              target: LatLng(4, 4),
+              zoom: 2,
+            ),
+            markers: {
+              Marker(markerId: MarkerId("my_house"), position: LatLng(4, 9), infoWindow: InfoWindow(title: "Anoni house", snippet: "come help me")),
+            },
+          ),
         ),
       ],
     );
