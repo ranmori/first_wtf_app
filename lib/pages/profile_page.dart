@@ -14,6 +14,8 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    var userProvider = Provider.of<UserNotifier>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile"),
@@ -37,10 +39,12 @@ class _ProfilePageState extends State<ProfilePage> {
               backgroundColor: Colors.red.shade100,
               foregroundColor: Colors.red.shade900,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8)
-              )
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
             onPressed: () {
+              userProvider.logout();
+
               Navigator.pushReplacementNamed(context, "/login");
             },
             icon: Icon(Icons.logout),
@@ -93,9 +97,11 @@ class _ProfilePageState extends State<ProfilePage> {
         ListTile(
           onTap: () {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context){
-                return NotificationsPage();
-              })
+              MaterialPageRoute(
+                builder: (context) {
+                  return NotificationsPage();
+                },
+              ),
             );
           },
           title: Text("Notifications", style: TextStyle(fontSize: 16)),
@@ -116,7 +122,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _buildDetails() {
     UserDetail? user = Provider.of<UserNotifier>(context).loggedInUser;
 
-    if(user == null) return Text("User Details not set");
+    if (user == null) return Text("User Details not set");
 
     return Column(
       children: [
