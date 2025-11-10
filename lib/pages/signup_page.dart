@@ -1,9 +1,11 @@
+import 'package:first_wtf_app/provider/user_notifier.dart';
 import 'package:first_wtf_app/widgets/custom_button.dart';
 import 'package:first_wtf_app/widgets/custom_textfield.dart';
 import 'package:first_wtf_app/widgets/password_textfield.dart';
 import 'package:first_wtf_app/widgets/social_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -13,8 +15,15 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    var userProv = Provider.of<UserNotifier>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
@@ -38,14 +47,20 @@ class _SignupPageState extends State<SignupPage> {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16),
             ),
-            CustomTextField(label: "Username"),
-            CustomTextField(label: "Email"),
-            PasswordTextfield(),
-            PasswordTextfield(),
+            CustomTextField(label: "Username",textEditingController: nameController,),
+            CustomTextField(label: "Email", textEditingController: emailController,),
+            PasswordTextfield(textEditingController: passwordController,),
+            PasswordTextfield(textEditingController: confirmPasswordController, label: "Confirm Password",),
             CustomButton(
               text: 'Sign up',
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed("/home");
+                
+                userProv.signUp(
+                  context: context,
+                  userName: nameController.text,
+                  password: passwordController.text,
+                  email: emailController.text
+                );
               },
             ),
             SocialSignIn(),

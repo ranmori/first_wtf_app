@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "915556525451",
+    "project_id": "medicall-f8000",
+    "storage_bucket": "medicall-f8000.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915556525451:android:9df53f7be9bcfa00b63b8e",
+        "android_client_info": {
+          "package_name": "com.example.first_wtf_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW7V3PDFET_hwgUnhlGJ9Z25zBE3bfe7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

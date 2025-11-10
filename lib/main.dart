@@ -1,6 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:first_wtf_app/bottom_navigation.dart';
+import 'package:first_wtf_app/firebase_options.dart';
 import 'package:first_wtf_app/pages/forgot_password_page.dart';
-import 'package:first_wtf_app/pages/home_page.dart';
 import 'package:first_wtf_app/pages/login_page.dart';
 import 'package:first_wtf_app/pages/onboarding_page.dart';
 import 'package:first_wtf_app/pages/signup_page.dart';
@@ -9,7 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 
@@ -19,20 +23,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context)=>UserNotifier(),
+      create: (context) => UserNotifier(),
       child: MaterialApp(
         title: 'Save A Life',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-          textTheme: GoogleFonts.robotoTextTheme()
+          textTheme: GoogleFonts.robotoTextTheme(),
         ),
-        debugShowCheckedModeBanner: false, 
+        debugShowCheckedModeBanner: false,
         routes: {
-          "/o": (context)=> OnboardingPage(),
-          "/home": (context)=> BottomNavigation(),
-          "/login": (context)=> LoginPage(),
-          "/signup": (context)=> SignupPage(),
-          "/forgot": (context)=> ForgotPasswordPage(),
+          "/o": (context) => OnboardingPage(),
+          "/home": (context) => BottomNavigation(),
+          "/login": (context) => LoginPage(),
+          "/signup": (context) => SignupPage(),
+          "/forgot": (context) => ForgotPasswordPage(),
         },
         initialRoute: "/login",
         // home: BottomNavigation()
