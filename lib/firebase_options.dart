@@ -63,6 +63,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '915556525451',
     projectId: 'medicall-f8000',
     storageBucket: 'medicall-f8000.firebasestorage.app',
+    androidClientId: '915556525451-8o529t9tt97qmvlihf5ls0gp8io396hn.apps.googleusercontent.com',
+    iosClientId: '915556525451-b2a1u3ql6a7r07emm1ut75trh18of22a.apps.googleusercontent.com',
     iosBundleId: 'com.example.firstWtfApp',
   );
+
 }

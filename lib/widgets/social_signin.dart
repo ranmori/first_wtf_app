@@ -1,5 +1,7 @@
 
+import 'package:first_wtf_app/provider/user_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SocialSignIn extends StatelessWidget {
   const SocialSignIn({
@@ -8,6 +10,7 @@ class SocialSignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var userP = Provider.of<UserNotifier>(context);
     return Column(
       children: [
         Row(
@@ -25,7 +28,9 @@ class SocialSignIn extends StatelessWidget {
           spacing: 8,
           children: [
             InkWell(
-              onTap: () {},
+              onTap: () {
+                userP.signInWithGoogle(context);
+              },
               child: Image.asset(
                 "assets/google.png",
                 width: 50,

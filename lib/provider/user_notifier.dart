@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_wtf_app/model/user_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class UserNotifier extends ChangeNotifier {
   UserDetail? loggedInUser;
@@ -60,11 +61,43 @@ class UserNotifier extends ChangeNotifier {
     }
   }
 
+  void signInWithGoogle(BuildContext context) async {
+    try {
+      var instance = GoogleSignIn.instance;
+      final GoogleSignInAccount? googleUser = await instance
+          .authenticate();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication googleAuth = googleUser!.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      UserCredential user = await FirebaseAuth.instance.signInWithCredential(
+        credential,
+      );
+
+      print(user);
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.message ?? "error occured")));
+    } catch (e) {
+      print(e);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
+
   void logout() async {
     await FirebaseAuth.instance.signOut();
   }
 
-  void forgotPassword(String email){
+  void forgotPassword(String email) {
     FirebaseAuth.instance.sendPasswordResetEmail(email: email);
   }
 }
