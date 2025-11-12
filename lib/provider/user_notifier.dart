@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_wtf_app/model/user_detail.dart';
 import 'package:flutter/material.dart';
@@ -12,11 +13,17 @@ class UserNotifier extends ChangeNotifier {
       UserCredential user = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      loggedInUser = UserDetail(
-        name: "name",
-        profilePicture: "profilePicture",
-        email: user.user!.email!,
-      );
+      //fetch user record from firestore
+      DocumentSnapshot docSnapshot = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(email)
+          .get();
+
+      Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
+
+      UserDetail userDetail = UserDetail.fromJson(data);
+
+      loggedInUser = userDetail;
 
       // take user to home page
       Navigator.of(context).pushReplacementNamed("/home");
@@ -39,9 +46,20 @@ class UserNotifier extends ChangeNotifier {
     required String email,
   }) async {
     try {
-      // create user on firebase
+      // create user on firebase auth
       UserCredential user = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
+
+      // create userdetail object
+      var userDetail = UserDetail(email: email, name: userName);
+
+      // store user to firestore
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(email)
+          .set(userDetail.toJson());
+
+      loggedInUser = userDetail;
 
       //Alert user on success
       ScaffoldMessenger.of(context).showSnackBar(
@@ -64,8 +82,7 @@ class UserNotifier extends ChangeNotifier {
   void signInWithGoogle(BuildContext context) async {
     try {
       var instance = GoogleSignIn.instance;
-      final GoogleSignInAccount? googleUser = await instance
-          .authenticate();
+      final GoogleSignInAccount? googleUser = await instance.authenticate();
 
       // Obtain the auth details from the request
       final GoogleSignInAuthentication googleAuth = googleUser!.authentication;
@@ -80,7 +97,23 @@ class UserNotifier extends ChangeNotifier {
         credential,
       );
 
-      print(user);
+      // create userdetail object
+      var userDetail = UserDetail(
+        email: user.user!.email!,
+        name: user.user!.displayName ?? "No name",
+        profilePicture: user.user!.photoURL ?? "",
+      );
+
+      // store user to firestore
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(userDetail.email)
+          .set(userDetail.toJson());
+
+      loggedInUser = userDetail;
+
+      // take user to home page
+      Navigator.of(context).pushReplacementNamed("/home");
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(
         context,
@@ -95,6 +128,7 @@ class UserNotifier extends ChangeNotifier {
 
   void logout() async {
     await FirebaseAuth.instance.signOut();
+    loggedInUser = null;
   }
 
   void forgotPassword(String email) {

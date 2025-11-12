@@ -112,10 +112,14 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _buildProfilePics() {
+    UserDetail? user = Provider.of<UserNotifier>(context).loggedInUser;
+
     return Container(
       decoration: BoxDecoration(shape: BoxShape.circle),
       clipBehavior: Clip.hardEdge,
-      child: Image.asset("assets/profile_pics.jpg", width: 100, height: 100),
+      child: user!.profilePicture.isEmpty
+          ? Icon(Icons.person_2, size: 100)
+          : Image.network(user!.profilePicture, width: 100, height: 100),
     );
   }
 
