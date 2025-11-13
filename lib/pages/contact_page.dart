@@ -1,3 +1,4 @@
+import 'package:first_wtf_app/widgets/hospital_list.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/contact_item.dart';
@@ -10,14 +11,7 @@ class ContactPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text("Contacts"), centerTitle: true),
-      body: ListView(
-        padding: EdgeInsets.all(16),
-        children: [
-          Card(
-            child: ContactItem(),
-          ),
-        ],
-      ),
+      body: HospitalList(),
     );
   }
 }

@@ -14,9 +14,7 @@ class HospitalNotifier extends ChangeNotifier {
         .collection("hospitals")
         .get();
 
-    List<QueryDocumentSnapshot<Map<String, dynamic>>> data = query.docs;
-
-    for (var doc in data) {
+    for (QueryDocumentSnapshot<Map<String, dynamic>> doc in query.docs) {
       Map<String, dynamic> docData = doc.data();
 
       Hospital hospital = Hospital.fromJson(docData);

@@ -1,5 +1,7 @@
+import 'package:first_wtf_app/model/hospital.dart';
 import 'package:first_wtf_app/provider/hospital_notifier.dart';
 import 'package:first_wtf_app/widgets/contact_item.dart';
+import 'package:first_wtf_app/widgets/hospital_list.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,24 +45,13 @@ class _HomePageState extends State<HomePage> {
                   // Widget for showing map image
                   _buildMapView(),
                   //Widget for list view
-                  _buildListView(),
+                  HospitalList(),
                 ],
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildListView() {
-    var hospitalNoti = Provider.of<HospitalNotifier>(context);
-    var hospitals = hospitalNoti.hospitals;
-    return ListView.builder(
-      itemCount: hospitals.length,
-      itemBuilder: (context, index) {
-        return ContactItem();
-      },
     );
   }
 

@@ -1,10 +1,14 @@
+import 'package:first_wtf_app/model/hospital.dart';
 import 'package:flutter/material.dart';
 
 
 class ContactItem extends StatelessWidget {
   const ContactItem({
     super.key,
+    required this.hospital,
   });
+
+  final Hospital hospital;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,7 @@ class ContactItem extends StatelessWidget {
                 // crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    "Jam Clinic",
+                    hospital.name,
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -27,7 +31,7 @@ class ContactItem extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    "No 53, Idu Crescent, FCT",
+                    hospital.address,
                     textAlign: TextAlign.center,
                   ),
                   Row(
@@ -51,7 +55,7 @@ class ContactItem extends StatelessWidget {
                     ),
                     textAlign: TextAlign.start,
                   ),
-                  Text("No history yet!",
+                  Text(hospital.description,
                     textAlign: TextAlign.center,),
                 ],
               ),
@@ -68,10 +72,10 @@ class ContactItem extends StatelessWidget {
         child: Icon(Icons.add_box_outlined),
       ),
       title: Text(
-        "Clinic name",
+        hospital.name,
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
-      subtitle: Text("12 November, 2025"),
+      subtitle: Text("${hospital.numberOfAmbulances} Ambulances Available"),
     );
   }
 }
