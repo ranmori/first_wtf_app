@@ -1,6 +1,8 @@
+import 'package:first_wtf_app/provider/hospital_notifier.dart';
 import 'package:first_wtf_app/widgets/contact_item.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,34 +54,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildListView() {
-    return ListView(
-      children: [
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-        ContactItem(),
-      ],
+    var hospitalNoti = Provider.of<HospitalNotifier>(context);
+    var hospitals = hospitalNoti.hospitals;
+    return ListView.builder(
+      itemCount: hospitals.length,
+      itemBuilder: (context, index) {
+        return ContactItem();
+      },
     );
   }
 
@@ -88,16 +70,24 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height * 0.7,
-          child: GoogleMap(
-            // onMapCreated: _onMapCreated,
-            initialCameraPosition: const CameraPosition(
-              target: LatLng(4, 4),
-              zoom: 2,
-            ),
-            markers: {
-              Marker(markerId: MarkerId("my_house"), position: LatLng(4, 9), infoWindow: InfoWindow(title: "Anoni house", snippet: "come help me")),
-            },
-          ),
+          child: Container()
+          // GoogleMap(
+          //   // onMapCreated: _onMapCreated,
+          //   initialCameraPosition: const CameraPosition(
+          //     target: LatLng(4, 4),
+          //     zoom: 2,
+          //   ),
+          //   markers: {
+          //     Marker(
+          //       markerId: MarkerId("my_house"),
+          //       position: LatLng(4, 9),
+          //       infoWindow: InfoWindow(
+          //         title: "Anoni house",
+          //         snippet: "come help me",
+          //       ),
+          //     ),
+          //   },
+          // ),
         ),
       ],
     );

@@ -1,6 +1,9 @@
 import 'package:first_wtf_app/model/review.dart';
-import 'package:first_wtf_app/model/user_detail.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'hospital.g.dart';
+
+@JsonSerializable()
 class Hospital {
   final String id;
   final String address;
@@ -10,7 +13,6 @@ class Hospital {
   final int rating;
   final String website;
   final List<String> phoneNumber;
-  final List<Review> reviews;
 
   Hospital({
     required this.id,
@@ -21,6 +23,9 @@ class Hospital {
     this.rating = 0,
     required this.website,
     required this.phoneNumber,
-    this.reviews = const [],
   });
+
+  Map<String, dynamic> toJson() => _$HospitalToJson(this);
+
+  factory Hospital.fromJson(Map<String, dynamic> json) => _$HospitalFromJson(json);
 }
