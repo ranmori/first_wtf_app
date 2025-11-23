@@ -95,14 +95,16 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         Divider(),
         ListTile(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return NotificationsPage();
-                },
-              ),
-            );
+  onTap: () {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => EditProfilePage(),
+      ),
+    );
+  },
+  title: Text("Personal Information", style: TextStyle(fontSize: 16)),
+  trailing: Icon(Icons.arrow_forward_ios_outlined, size: 16),
+),
           },
           title: Text("Notifications", style: TextStyle(fontSize: 16)),
           trailing: Icon(Icons.arrow_forward_ios_outlined, size: 16),
