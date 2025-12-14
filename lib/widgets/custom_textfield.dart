@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -7,6 +6,7 @@ class CustomTextField extends StatelessWidget {
     required this.label,
     this.textEditingController,
   });
+
   final String label;
   final TextEditingController? textEditingController;
 
@@ -14,11 +14,18 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: textEditingController,
+      style: const TextStyle(
+        color: Colors.white, // typing text color
+      ),
+      cursorColor: Colors.white, //  cursor color
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
         ),
         labelText: label,
+        labelStyle: const TextStyle(
+          color: Colors.white70, // label color
+        ),
       ),
     );
   }
