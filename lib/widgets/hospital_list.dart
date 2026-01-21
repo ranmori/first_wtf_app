@@ -11,6 +11,7 @@ class HospitalList extends StatelessWidget {
   Widget build(BuildContext context) {
     var hospitalNoti = Provider.of<HospitalNotifier>(context);
     List<Hospital> hospitals = hospitalNoti.hospitals;
+    
     return ListView.builder(
       itemCount: hospitals.length,
       itemBuilder: (context, index) {
